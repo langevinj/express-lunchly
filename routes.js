@@ -18,6 +18,19 @@ router.get("/", async function(req, res, next) {
   }
 });
 
+/** Search for a customer by name */
+router.get("/search", async function(req, res, next) {
+  try {
+    const name = (req.query.name).split(' ')
+    const search_ids = await Customer.search(name);
+    const customers = await Customer.all();
+
+    return res.render("customer_list.html", { customers, search_ids });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 /** Form to add a new customer. */
 
 router.get("/add/", async function(req, res, next) {

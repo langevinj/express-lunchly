@@ -53,6 +53,40 @@ class Customer {
     return new Customer(customer);
   }
 
+  /** Search for customers by name */
+  static async search(name){
+    if (name.length != 2 && name.length != 1) {
+      const newError = new Error('Search not valid')
+      newError.status = 404;
+      throw newError;
+    }
+
+    let results;
+
+    if (name.length == 2) {
+      results = await db.query(
+        `SELECT id
+        FROM customers WHERE first_name = $1 and last_name = $2`,
+        [name[0], name[1]]
+      );
+    } else if (name.length == 1) {
+      results = await db.query(
+        `SELECT id FROM customers
+        WHERE first_name = $1`,
+        [name[0]]
+      );
+    }
+  
+    if (results.rows.length === 0){
+      const err = new Error(`No customers by that name`);
+      err.status = 404;
+      throw err;
+    }
+
+    return results.rows.map(r => r.id)
+  }
+
+
   /** get all reservations for this customer. */
 
   async getReservations() {
