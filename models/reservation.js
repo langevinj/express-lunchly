@@ -22,13 +22,28 @@ class Reservation {
     return moment(this.startAt).format('MMMM Do YYYY, h:mm a');
   }
 
-  // get notes(){
-  //   return this._notes;
-  // }
+  /**Validation that numGuests is > 0 */
+  get numGuests(){
+    return this._numGuests;
+  }
 
-  // set notes(string){
-  //   this._notes = string;
-  // }
+  set numGuests(num){
+    if(num < 1){
+      throw new Error("You must have at least 1 person for a reservation")
+    }
+    this._numGuests = num;
+  }
+
+  get startAt(){
+    return this._startAt;
+  }
+
+  set startAt(date){
+    if(!moment(date).isValid()){
+      throw new Error("Invalid date")
+    }
+    this._startAt = new Date(date);
+  }
 
   /** given a customer id, find their reservations. */
 
