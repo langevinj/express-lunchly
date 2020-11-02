@@ -29,15 +29,6 @@ class Customer {
     return results.rows.map(c => new Customer(c));
   }
 
-  /** Hidden setter function for notes */
-  // set notes(val){
-  //   if(!val){
-  //     this._notes = ""
-  //   } else {
-  //     this._notes = val;
-  //   }
-  // }
-
   /** get a customer by ID. */
 
   static async get(id) {
