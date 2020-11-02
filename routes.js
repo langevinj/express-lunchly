@@ -31,6 +31,17 @@ router.get("/search", async function(req, res, next) {
   }
 });
 
+/** Show top customers */
+
+router.get("/top-customers", async function (req, res, next) {
+  try {
+    const topCustomers = await Reservation.topCustomers()
+    return res.render("top_customers.html", { topCustomers });
+  } catch (err) {
+    return next(err);
+  }
+})
+
 /** Form to add a new customer. */
 
 router.get("/add/", async function(req, res, next) {

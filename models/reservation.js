@@ -39,6 +39,20 @@ class Reservation {
     return results.rows.map(row => new Reservation(row));
   }
 
+  /** find the top 10 customers, those with the most reservations */
+
+  static async topCustomers() {
+    const results = await db.query(
+      `SELECT first_name AS "firstName", last_name AS "lastName", customer_id, COUNT(*) as numReservations
+      FROM reservations
+      JOIN customers on reservations.customer_id = customers.id
+      GROUP BY first_name, last_name, customer_id
+      ORDER BY numReservations DESC
+      LIMIT 10`
+    );
+    return results.rows
+  }
+
   /** save this reservation */
   async save(){
     if(this.id === undefined) {
