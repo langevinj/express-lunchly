@@ -22,6 +22,14 @@ class Reservation {
     return moment(this.startAt).format('MMMM Do YYYY, h:mm a');
   }
 
+  // get notes(){
+  //   return this._notes;
+  // }
+
+  // set notes(string){
+  //   this._notes = string;
+  // }
+
   /** given a customer id, find their reservations. */
 
   static async getReservationsForCustomer(customerId) {

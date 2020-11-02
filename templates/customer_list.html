@@ -10,12 +10,12 @@
   {% for customer in customers %}
     {% if search_ids %}
       {% if search_ids.includes(customer.id) %}
-        <li class="bg-warning"><a href="/{{ customer.id }}/">{{ customer.fullName() }}</a></li>
+        <li class="bg-warning"><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
       {% else %}
-        <li><a href="/{{ customer.id }}/">{{ customer.fullName() }}</a></li>
+        <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
       {% endif %}
     {% else %}
-    <li><a href="/{{ customer.id }}/">{{ customer.fullName() }}</a></li>
+    <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
     {% endif %}
   {% endfor %}
 </ul>
